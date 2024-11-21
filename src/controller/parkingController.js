@@ -22,7 +22,7 @@ const makeBooking = async (req, res) => {
         res.status(400).json({ error: error.message });
     }
 };
-
+ 
 const viewBookings = async (req, res) => {
     try {
         const bookings = await getBookings(req.user.id);
