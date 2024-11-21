@@ -1,4 +1,5 @@
 const { getAvailableSpots, bookSpot, getBookings } = require('../services/parkingService');
+const { emitParkingUpdate } = require('../utilis/socket');
 
 
 
@@ -16,6 +17,7 @@ const makeBooking = async (req, res) => {
         const { spotId, durationHours } = req.body;
         const booking = await bookSpot(req.user.id, spotId, durationHours);
         res.status(201).json({ message: 'Booking successful', booking });
+        emitParkingUpdate();
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
