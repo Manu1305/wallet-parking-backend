@@ -11,11 +11,15 @@ const parkingRoutes = require('./routes/parkingRoutes');
 require('./middleware/passportMiddleware');
 
 const app = express();
-
+const corsOptions = {
+    origin: '*', 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+};
 // Middleware
 app.use(express.json());
 app.use(helmet());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(passport.initialize());
 app.use('/api/parking', parkingRoutes);
 // Routes
